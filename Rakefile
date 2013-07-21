@@ -1,4 +1,12 @@
 # vim: et sts=2 ts=2 sw=2 ft=ruby:
+
+TEMPLATE_FILES = [
+  'browser.html',
+  'bubbletree-map.html',
+  'dailybread.html',
+  'dailybread_white.html',
+]
+
 task 'default' => ['generate_config', 'generate_template']
 
 task 'generate_config' do
@@ -18,7 +26,12 @@ task 'generate_template' do
     path.sub %r!^config/(.*)\.yml$!, '\1'
   end
   regions.each do |region|
-    mkdir region
+    unless Dir.exist? region then
+      mkdir region
+    end
+    TEMPLATE_FILES.each do |file|
+      cp file, region
+    end
   end
 end
 
