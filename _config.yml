@@ -1,5 +1,4 @@
 pygments: true
-auto: true
 
 # Set the title, tagline of the site
 title: Set title in _config.yml
