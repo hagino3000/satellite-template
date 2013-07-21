@@ -8,7 +8,7 @@ title: The Daily Bread
   <div id="dailybread">
     <h2 class="page-header">{{ site.dailybread.title }} {% if site.dailybread.tagline %}<small>{{ site.dailybread.tagline }}</small>{% endif %}</h2>
 
-    <div id="preloader" style="text-align: center; padding: 100px"><img src="{{site.subdirectory}}/img/ajax-loader.gif" style="vertical-align:top" /> &nbsp;<span class="txt">{{ site.dailybread.loadingtext }}</span></div>
+    <div id="preloader" style="text-align: center; padding: 100px"><img src="{{site.subdirectory}}/components/img/ajax-loader.gif" style="vertical-align:top" /> &nbsp;<span class="txt">{{ site.dailybread.loadingtext }}</span></div>
 
     <div id="content-wrap" style="display:none">
       <div id="db-topbar" class="layout-row layout-3col-15-70-15">
@@ -47,7 +47,7 @@ title: The Daily Bread
       if (style != undefined) {
        return style['icon'];
       }
-      return 'img/functions/unknown.svg';
+      return '{{site.subdirectory}}/components/img/functions/unknown.svg';
     });
     db.draw();
   }
@@ -91,7 +91,7 @@ title: The Daily Bread
       os_path + '/lib/vendor/raphael-min.js',
       os_path + '/lib/aggregator.js',
       os_path + '/app/dailybread/css/dailybread.css',
-      '/img/functions/cofog_dailybread.js',
+      '{{site.subdirectory}}/components/img/functions/cofog_dailybread.js',
       os_path + '/app/dailybread/js/dailybread.js'
     ],
     complete: function () { jQuery(function ($) { db_init() } ); }
