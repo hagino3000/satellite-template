@@ -1,0 +1,93 @@
+---
+layout: default
+---
+
+<script src="{{site.openspendingjs}}/app/bubblemap/bubblemap.js"></script>
+<script src="{{site.subdirectory}}/img/functions/cofog.js"></script>
+
+<script type="text/javascript">
+(function ($) {
+  yepnope([
+   { load: OpenSpending.getBubbleMapDependencies('{{site.openspendingjs}}'),
+     complete: function() {
+       {% if site.bubblemap.map %}
+       new OpenSpending.BubbleMap({
+          openspendingjs: '{{site.openspendingjs}}',
+          query: {
+            dataset: '{{ site.bubblemap.tree.dataset }}',
+            cuts: ['{{ site.bubblemap.tree.cuts | join:"', '"}}'],
+            drilldowns: ['{{ site.bubblemap.tree.drilldowns | join:"', '" }}'],
+            breakdown: '{{ site.bubblemap.tree.breakdown }}',
+            rootNodeLabel: '{{ site.bubblemap.tree.rootlabel }}'
+          },
+          bubbleStyles: {
+		'cofog-1':  BubbleTreeStyles.Cofog1,
+		'cofog-2':  BubbleTreeStyles.Cofog2,
+		'cofog-3':  BubbleTreeStyles.Cofog3
+				  },
+          map: {
+		  url: '{{ site.<%= @region %>.bubblemap.map.url }}',
+            layerName: '{{ site.bubblemap.map.layer}}',
+            keyAttribute: '{{ site.bubblemap.map.key }}',
+            legendText: '{{ site.bubblemap.map.legend }}'
+          },
+          table: { show: false }
+        });
+      {% else %}
+        new OpenSpending.Aggregator({
+            apiUrl: 'http://openspending.org/api',
+            dataset: '{{site.bubblemap.tree.dataset}}',
+            {% if site.bubblemap.tree.cuts %}cuts: ['{{ site.bubblemap.tree.cuts | join:"', '"}}'],{% endif %}
+            drilldowns: ['{{ site.bubblemap.tree.drilldowns | join:"', '" }}'],
+            rootNodeLabel: '{{ site.bubblemap.tree.rootlabel }}',
+            callback: function(data) {
+                $('#wdmmg-bubbletree').empty();
+                $('#preloader').hide();
+                self.bt = new BubbleTree({
+                    data: data,
+                    container: '#wdmmg-bubbletree',
+                    bubbleType: 'icon',
+                    minRadiusLabels: 40,
+                    minRadiusAmounts: 20,
+                    minRadiusHideLabels: 0,
+                    cutLabelsAt: 20,
+                    rootPath: '/img/functions/',
+                    tooltip: {
+                        qtip: true,
+                        delay: 800,
+                        content: function(node) {
+                            var famount = OpenSpending.Utils.formatAmountWithCommas(node.amount, 0, 'NPR');
+                            return [node.label, '<div class="amount">'+famount+'</div>'];
+                        }
+                    },
+                    bubbleStyles: {
+                      'cofog-1':  BubbleTreeStyles.Cofog1,
+                      'cofog-2':  BubbleTreeStyles.Cofog2,
+                      'cofog-3':  BubbleTreeStyles.Cofog3
+                    },
+                });
+            }
+        });
+      {% endif %}
+    }
+   }
+  ]); // yepnope()
+})(jQuery)
+</script>
+
+<div id="wdmmg-bubblemap">
+  <div id="preloader" style="text-align: center; padding: 100px"><img src="{{site.subdirectory}}/img/ajax-loader.gif" style="vertical-align:top" /> &nbsp;<span class="txt">loading javascript libraries</span></div>
+
+  <div id="wdmmg-bt">
+    <div class="bubbletree-wrapper">
+        <div id="wdmmg-bubbletree" class="bubbletree"></div>
+    </div>  
+  </div>
+  {% if site.bubblemap.map %}
+  <div id="wdmmg-map-legend" class="under-curtain"></div>
+  <div id="wdmmg-map" class="under-curtain"></div>
+  {% endif %}
+</div><!-- /#wdmmg-bubblemap -->
+
+
+

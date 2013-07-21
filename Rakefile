@@ -2,7 +2,7 @@
 
 TEMPLATE_FILES = [
   'browser.html',
-  'bubbletree-map.html',
+  'bubbletree-map.html.erb',
   'dailybread.html',
   'dailybread_white.html',
 ]
@@ -30,6 +30,19 @@ task 'generate_template' do
       mkdir region
     end
     TEMPLATE_FILES.each do |file|
+      if file =~ /\.erb$/ then
+        require 'erb'
+        erb_file = file
+        file = erb_file.sub(/\.erb$/, '')
+        data = File.open(erb_file){|f| f.read}
+        unless File.exist? File.join([region, file]) then
+          @region = region
+          File.open file, 'w' do |f|
+            puts "erb #{erb_file} > #{file}"
+            f << ERB.new(data).result
+          end
+        end
+      end
       unless File.exist? File.join([region, file]) then
         cp file, region
       end
