@@ -2,7 +2,7 @@
 task 'default' => 'generate_config'
 
 task 'generate_config' do
-  configs = FileList.new 'config.yml', 'config/*.yml'
+  configs = FileList.new 'common.yml', 'config/*.yml'
   File.open '_config.yml', 'w' do |config_file|
     configs.each do |config|
       file = File.open config do |f|
