@@ -1,7 +1,7 @@
-
+yokohama:
 # Set the title, tagline of the site
-title: 税金はどこへいった 横浜版
-tagline: 税金がどこへいったかをおしめしします
+  title: 税金はどこへいった 横浜版
+  tagline: 税金がどこへいったかをおしめしします
 
 # Where is the template located (if it's not in the root)
 # Remove the '#' from the next line and update the path if you have
@@ -11,51 +11,51 @@ tagline: 税金がどこへいったかをおしめしします
 # We recommend you leave the openspending clause as is (or close to
 # it as you can, e.g. you can replace "on this site" with
 # "on [your site title]" or translate it.
-frontpage:
-    title: Set frontpage title in _config.yml
-    openspending: |-
-        The data presented on this site comes from
-        <a href="http://openspending.org">OpenSpending</a>, 
-        where you can find information about 
-        government finance from countries across the world.
+  frontpage:
+      title: Set frontpage title in _config.yml
+      openspending: |-
+          The data presented on this site comes from
+          <a href="http://openspending.org">OpenSpending</a>, 
+          where you can find information about 
+          government finance from countries across the world.
 
 # Bubblemap configuration include bubbletree and map
 # If you don't want bubblemap set this to false
 # bubblemap : false
 # If you don't include map configurations, only the BubbleTree will be shown
 # This shows by default the UK country/regional analysis finances
-bubblemap:
-    title: Bubblemap template
-    description: |-
-        How much is spent on the various functions of 
-        government in total &mdash; and where?
-    tree:
-        dataset: ukgov-finances-cra
-        cuts:
-            - year:2010
-        drilldowns:
-            - cofog1
-            - cofog2
-            - cofog3
-        breakdown: region
-        rootlabel: Total
-    map:
-        url: /img/gbr.svg
-        layer: GBR
-        key: region
-        legend: Expenditure on
+  bubblemap:
+      title: Bubblemap template
+      description: |-
+          How much is spent on the various functions of 
+          government in total &mdash; and where?
+      tree:
+          dataset: ukgov-finances-cra
+          cuts:
+              - year:2010
+          drilldowns:
+              - cofog1
+              - cofog2
+              - cofog3
+          breakdown: region
+          rootlabel: Total
+      map:
+          url: /img/gbr.svg
+          layer: GBR
+          key: region
+          legend: Expenditure on
 
 # Browser configurations
 # If you don't want the transaction browser set this to false
 # browser : false
 # This shows by default the UK deparmental spending over £25,000
-browser:
-    title: Browser template
-    tagline: Transactions over £ 25,000
-    description: |-
-        Search every transaction over £25,000
-        made by the government's departments.
-    dataset: ukgov-25k-spending
+  browser:
+      title: Browser template
+      tagline: Transactions over £ 25,000
+      description: |-
+          Search every transaction over £25,000
+          made by the government's departments.
+      dataset: ukgov-25k-spending
 
 # Dailybread configurations
 # If you don't want dailybread set this to false
@@ -63,30 +63,30 @@ browser:
 # This shows by default the UK country/regional analysis finances
 # Taxman returns non-standard responses so the dailybread only works with
 # taxman responses like the one for the UK
-dailybread:
-    title: Daily Bread template
-    tagline: Costs for the British Taxpayer per Day
-    description: |-
-        See how your daily taxes are divided between the 
-        different parts of government.
-    dataset: ukgov-finances-cra
-    country: gb
-    year: 2010
-    symbol: £
-    drilldowns:
-        - cofog1
-        - cofog2
-        - cofog3
-    breakdown: region
-    rootlabel: Total
-    salary:
-        label: Salary
-        minimum: 10000
-        maximum: 200000
-        step: 10
-        default: 22000
-        inputrequest: Select your salary
-    tax:
-        label: Your tax
-        default: 8621
-    loadingtext: loading javascript libraries
+  dailybread:
+      title: Daily Bread template
+      tagline: Costs for the British Taxpayer per Day
+      description: |-
+          See how your daily taxes are divided between the 
+          different parts of government.
+      dataset: ukgov-finances-cra
+      country: gb
+      year: 2010
+      symbol: £
+      drilldowns:
+          - cofog1
+          - cofog2
+          - cofog3
+      breakdown: region
+      rootlabel: Total
+      salary:
+          label: Salary
+          minimum: 10000
+          maximum: 200000
+          step: 10
+          default: 22000
+          inputrequest: Select your salary
+      tax:
+          label: Your tax
+          default: 8621
+      loadingtext: loading javascript libraries
