@@ -34,10 +34,11 @@ task 'generate_template' do
         require 'erb'
         erb_file = file
         file = erb_file.sub(/\.erb$/, '')
+        path = File.join([region, file])
         data = File.open(erb_file){|f| f.read}
-        unless File.exist? File.join([region, file]) then
+        unless File.exist? path then
           @region = region
-          File.open file, 'w' do |f|
+          File.open path, 'w' do |f|
             puts "erb #{erb_file} > #{file}"
             f << ERB.new(data).result
           end
