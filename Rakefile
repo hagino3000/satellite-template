@@ -30,7 +30,22 @@ task 'generate_template' do
       mkdir region
     end
     TEMPLATE_FILES.each do |file|
-      cp file, region
+      unless File.exist? File.join([region, file]) then
+        cp file, region
+      end
+    end
+    images = FileList.new 'img', 'img/*', 'img/*/*'
+    images.each do |image|
+      path = File.join [region, image]
+      unless (File.basename image).include? '.' then
+        unless Dir.exist? path then
+          mkdir path
+        end
+      else
+        unless File.exist? path then
+          cp image, path
+        end
+      end
     end
   end
 end
